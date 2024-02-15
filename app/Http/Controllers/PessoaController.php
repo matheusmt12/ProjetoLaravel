@@ -12,6 +12,14 @@ class PessoaController extends Controller
         return view('Pessoa.Create');
     }
 
+    public function index(){
+
+        $pessoas = Pessoa::all();
+
+        return view('Pessoa.index',compact('pessoas'));
+
+
+    }
 
     public function salvarPessoa(Request $request){
 
@@ -20,6 +28,20 @@ class PessoaController extends Controller
             'telefone'=> $request->input('telefone')
         ]);
 
-        return redirect('/')->with('mensagem', 'Produto cadastrado.');
+        return redirect('/pessoa')->with('mensagem', 'Produto cadastrado.');
+    }
+
+
+    public function remove($id){
+
+
+        $pessoa = Pessoa::find($id);
+        
+
+        if($pessoa){
+            $pessoa->delete();
+            return redirect('/')->with('mensagem', 'Venda removida com sucesso.');
+        }
+        return redirect('/')->with('mensagem', 'Venda removida com sucesso.');
     }
 }

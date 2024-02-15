@@ -58,7 +58,7 @@
 </head>
 <body>
 
-    <form action="/salvarPessoa" method="post">
+    <form action="/pessoa/salvarPessoa" method="post">
         @csrf
         <h2>Cadastro de Pessoa</h2>
 

@@ -82,7 +82,7 @@ class VendaController extends Controller
                 'venda_id' => $idVenda
             ]);
 
-            echo $dataVencimento[$key];
+            return redirect('/')->with('mensagem', 'Venda feita com sucesso');
 
         }
 

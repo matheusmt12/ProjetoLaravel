@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\Produto;
 class ProdutoController extends Controller
 {
+
+    public function index(){
+
+        $produtos = Produto::all();
+
+        return view('Produto.index', compact('produtos'));
+
+    }
+
+
     public function cadastrar(){
         return view('Produto.Create');
     }
@@ -18,7 +28,7 @@ class ProdutoController extends Controller
             'name' => $request->input('name'),
             'valor' => $request->input('valor'),
         ]);
-        return redirect('/')->with('mensagem', 'Produto cadastrado.');
+        return redirect('/produto')->with('mensagem', 'Produto cadastrado.');
 
     }
 }

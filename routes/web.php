@@ -25,15 +25,31 @@ Route::get('/remove/{id}','App\Http\Controllers\VendaController@remove');
 
 //produto
 
-Route::get('/produto', 'App\Http\Controllers\ProdutoController@cadastrar');
-Route::post('/salvarProduto', 'App\Http\Controllers\ProdutoController@salvarProduto');
+Route::prefix('/produto')->group(function (){
+
+    Route::get('/', 'App\Http\Controllers\ProdutoController@index');
+    Route::get('/cadastrar', 'App\Http\Controllers\ProdutoController@cadastrar');
+    Route::post('/salvarProduto', 'App\Http\Controllers\ProdutoController@salvarProduto');
+
+});
+
+
+
 
 
 
 //pessoa
 
-Route::get('/pessoa', 'App\Http\Controllers\PessoaController@cadastrar');
-Route::post('/salvarPessoa', 'App\Http\Controllers\PessoaController@salvarPessoa');
+Route::prefix('/pessoa')->group(function (){
+
+    Route::get('/', 'App\Http\Controllers\PessoaController@index');
+    Route::get('/cadastrar', 'App\Http\Controllers\PessoaController@cadastrar');
+    Route::post('/salvarPessoa', 'App\Http\Controllers\PessoaController@salvarPessoa');
+    Route::get('/remove/{id}','App\Http\Controllers\PessoaController@remove');
+});
+
+
+
 
 // Route::get('/', function () {
 //     return view('welcome');

@@ -24,4 +24,5 @@
 <nav>
     <a href="/pessoa">Pessoa</a>
     <a href="/produto">Produto</a>
+    <a href="/">Venda</a>
 </nav>
