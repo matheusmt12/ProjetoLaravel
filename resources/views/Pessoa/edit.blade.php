@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Produto</title>
+    <title>Editar Pessoa</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,7 +36,7 @@
         }
 
         input[type="text"],
-        input[type="number"],
+        input[type="tel"],
         input[type="submit"] {
             width: 100%;
             padding: 10px;
@@ -58,20 +58,16 @@
 </head>
 <body>
 
-    <form action="/produto/salvarProduto" method="post">
+    <form action="/pessoa/editSalvar" method="post">
         @csrf
-        <h2>Cadastro de Produto</h2>
+        <h2>Editar</h2>
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" value="{{$pessoa->name}}" required>
+        <input type="hidden" value="{{$pessoa->id}}" name="id">
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" name="telefone"value="{{$pessoa->telefone}}" required>
 
-        <label for="nome">Nome do Produto:</label>
-        <input type="text" id="nome" name="name" required>
-        @if($errors->has('name'))
-            {{$errors->first('name')}}
-            <br>
-        @endif
-        <label for="valor">Valor do Produto (R$):</label>
-        <input type="number" id="valor" name="valor" step="0.01" required>
-
-        <input type="submit" value="Cadastrar Produto">
+        <input type="submit" value="Cadastrar Pessoa">
     </form>
 
 </body>

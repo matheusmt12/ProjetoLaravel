@@ -6,14 +6,18 @@
     <title>Lista de Produtos</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-size: 16px;
+        }
+        main {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: auto;
         }
 
         table {
@@ -44,19 +48,21 @@
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-
+    @include('site.layout.nav')
+    <main>    
     <a href="/produto/cadastrar" class="btn-new-product">Novo Produto</a>
-
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nome do Produto</th>
                 <th>Valor (R$)</th>
+                <th>Ação</th>
             </tr>
         </thead>
         <tbody>
@@ -65,10 +71,14 @@
                     <td>{{ $produto->id }}</td>
                     <td>{{ $produto->name }}</td>
                     <td>{{ $produto->valor }}</td>
+                    <td><a href="/produto/remove/{{ $produto->id }}" onclick="return confirm('Tem certeza que deseja remover?')">Remover</a>|
+                        <a href="/produto/edit/{{ $produto->id }}">Editar</a>
+                </td>
+
                 </tr>
             @endforeach
         </tbody>
     </table>
-
+    </main>
 </body>
 </html>

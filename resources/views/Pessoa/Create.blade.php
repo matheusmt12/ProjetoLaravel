@@ -64,7 +64,11 @@
 
         <label for="name">Nome:</label>
         <input type="text" id="name" name="name" required>
-
+        @if($errors->has('name'))
+            {{$errors->first('name')}}
+            <br>
+        @endif
+        
         <label for="telefone">Telefone:</label>
         <input type="tel" id="telefone" name="telefone" required>
 

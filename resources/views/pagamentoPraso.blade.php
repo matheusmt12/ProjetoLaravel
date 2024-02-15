@@ -115,20 +115,22 @@
 
             var valorParcela = valorCompra / numParcelas;
             var table = document.getElementById('parcelasTable');
-            table.innerHTML = '';
+            table.innerHTML = '';  // Removido para evitar a remoção de elementos recém-criados
 
             var currentDate = new Date(); // Data atual
 
-            // Adiciona cabeçalho da tabela
-            var headerRow = table.insertRow(0);
-            headerRow.style.backgroundColor = '#4caf50';
-            headerRow.style.color = 'white';
-            var headerCell1 = headerRow.insertCell(0);
-            headerCell1.innerHTML = 'Parcela';
-            var headerCell2 = headerRow.insertCell(1);
-            headerCell2.innerHTML = 'Valor';
-            var headerCell3 = headerRow.insertCell(2);
-            headerCell3.innerHTML = 'Data Vencimento';
+            // Adiciona cabeçalho da tabela se não existir
+            if (table.getElementsByTagName('thead').length === 0) {
+                var headerRow = table.createTHead().insertRow(0);
+                headerRow.style.backgroundColor = '#4caf50';
+                headerRow.style.color = 'white';
+                var headerCell1 = headerRow.insertCell(0);
+                headerCell1.innerHTML = 'Parcela';
+                var headerCell2 = headerRow.insertCell(1);
+                headerCell2.innerHTML = 'Valor';
+                var headerCell3 = headerRow.insertCell(2);
+                headerCell3.innerHTML = 'Data Vencimento';
+            }
 
             for (var i = 1; i <= numParcelas; i++) {
                 // Adiciona um mês a cada parcela

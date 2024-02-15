@@ -40,14 +40,23 @@ class VendaController extends Controller
         return redirect('/')->with('mensagem', 'Venda removida com sucesso.');
     }
 
+
+    public function detalhes($id) {
+        $vendas = Venda::find($id);
+        if ($vendas){
+
+            return view('Venda.detalhes', compact('vendas'));
+
+        }
+
+    }
+    
     public function criarVenda(Request $request){
 
         $precos = $request->input('precos');
         $tipoVenda = $request->input('tipoPagamento');
-        $valor = 0;
-        foreach ($precos as $preco) {
-           $valor += $preco; 
-        }
+        $valor = $request->input('valor');
+
 
         
         $venda = Venda::create([
@@ -59,7 +68,7 @@ class VendaController extends Controller
         $idVenda = $venda->id;
 
         if( $tipoVenda == 'vista'){
-            echo 'vista';
+            return redirect('/')->with('mensagem', 'Venda feita com sucesso');
         }else{
             return view('pagamentoPraso',compact('valor','idVenda'));
         }
@@ -82,10 +91,10 @@ class VendaController extends Controller
                 'venda_id' => $idVenda
             ]);
 
-            return redirect('/')->with('mensagem', 'Venda feita com sucesso');
+
 
         }
 
-
+        return redirect('/')->with('mensagem', 'Venda feita com sucesso');
     }
 }

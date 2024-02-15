@@ -13,4 +13,10 @@ class Venda extends Model
     public function parcelas(){
         return $this->hasMany(Parcela::class);
     }
+
+
+    public function pessoa(){
+        return $this->belongsTo('App\Models\Pessoa');
+    }
+
 }

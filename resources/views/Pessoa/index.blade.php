@@ -6,23 +6,28 @@
     <title>Lista de Pessoas</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-size: 16px;
+        }
+
+        main {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            overflow: auto;
         }
 
         table {
-            width: 80%;
+            width: 100%;
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: auto;
+            margin-top: 20px;
             text-align: left;
         }
 
@@ -44,6 +49,7 @@
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
+            text-align: center;
         }
     </style>
 </head>
@@ -51,28 +57,33 @@
 <body>
 
     @include('site.layout.nav')
-    <a href="/pessoa/cadastrar" class="btn-new-person">Nova Pessoa</a>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Telefone</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($pessoas as $pessoa)
+    <main>
+        <a href="/pessoa/cadastrar" class="btn-new-person">Nova Pessoa</a>
+
+        <table>
+            <thead>
                 <tr>
-                    <td>{{ $pessoa->id }}</td>
-                    <td>{{ $pessoa->name }}</td>
-                    <td>{{ $pessoa->telefone }}</td>
-                    <td><a href="pessoa/remove/{{ $pessoa->id }}"onclick="return confirm('Tem certeza que deseja remover?')">Remover</a></td>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Ação</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach($pessoas as $pessoa)
+                    <tr>
+                        <td>{{ $pessoa->id }}</td>
+                        <td>{{ $pessoa->name }}</td>
+                        <td>{{ $pessoa->telefone }}</td>
+                        <td><a href="pessoa/remove/{{ $pessoa->id }}" onclick="return confirm('Tem certeza que deseja remover?')">Remover</a>|
+                            <a href="pessoa/edit/{{ $pessoa->id }}">Editar</a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </main>
 
 </body>
 </html>

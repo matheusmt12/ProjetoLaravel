@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Produto</title>
+    <title>Editar Produto</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -58,20 +58,22 @@
 </head>
 <body>
 
-    <form action="/produto/salvarProduto" method="post">
+    <form action="/produto/editSalvar" method="post">
         @csrf
-        <h2>Cadastro de Produto</h2>
+        <h2>Editar Produto</h2>
 
         <label for="nome">Nome do Produto:</label>
-        <input type="text" id="nome" name="name" required>
+        <input type="text" id="nome" name="name" value="{{$produto->name}}" required>
         @if($errors->has('name'))
             {{$errors->first('name')}}
             <br>
         @endif
-        <label for="valor">Valor do Produto (R$):</label>
-        <input type="number" id="valor" name="valor" step="0.01" required>
+        <input type="hidden" value="{{$produto->id}}" name="id">
 
-        <input type="submit" value="Cadastrar Produto">
+        <label for="valor">Valor do Produto (R$):</label>
+        <input type="number" id="valor" name="valor" value="{{$produto->valor}}" step="0.01" required>
+
+        <input type="submit" value="Salvar">
     </form>
 
 </body>

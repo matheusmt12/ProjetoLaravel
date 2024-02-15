@@ -7,14 +7,10 @@
     <link rel="stylesheet" href="css/app.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100vh;
+            font-size: 16px;
         }
 
         header {
@@ -23,6 +19,7 @@
             padding: 10px;
             text-align: center;
             width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         main {
@@ -38,6 +35,7 @@
             border-collapse: collapse;
             width: 100%;
             margin-top: 20px;
+            border-spacing: 0;
         }
 
         th, td {
@@ -53,15 +51,18 @@
 
         tr:hover {
             background-color: #f5f5f5;
+            transition: background-color 0.3s ease;
         }
 
         a {
-            color: #007bff;
+            color: #0056b3;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         a:hover {
             text-decoration: underline;
+            color: #003366;
         }
 
         .empty-message {
@@ -104,7 +105,8 @@
                             <td>{{ $venda->name }}</td>
                             <td>R$ {{ number_format($venda->valor, 2, ',', '.') }}</td>
                             <td>
-                                <a href="/remove/{{ $venda->id }}" onclick="return confirm('Tem certeza que deseja remover?')">Remover</a>
+                                <a href="/remove/{{ $venda->id }}" onclick="return confirm('Tem certeza que deseja remover?')">Remover</a>|
+                                <a href="/detalhes/{{ $venda->id }}">Detalhes</a>
                             </td>
                         </tr>
                     @endforeach
