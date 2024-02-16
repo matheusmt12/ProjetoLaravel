@@ -85,7 +85,7 @@ class VendaController extends Controller
             return redirect('/')->with('mensagem', 'Venda feita com sucesso');
         }else{
             $name = $request->input('name');
-            return view('pagamentoPraso',compact('valor','name'));
+            return view('Venda.pagamentoPraso',compact('valor','name'));
         }
 
     }
@@ -98,11 +98,12 @@ class VendaController extends Controller
         $valor = $request->input('valorCompra');
         $name = $request->input('name');
 
+        $parcelaTotal = 0;
 
         if (!is_array($parcelas) || empty($parcelas)) {
-            return view('pagamentoPraso',compact('valor','name'))->with('erro', 'Voce precisa gerar as parcelas');
-
+            return view('Venda.pagamentoPraso',compact('valor','name'))->with('erro', 'Voce precisa gerar as parcelas');
         }
+
 
         $data = new DateTime();
         $venda = Venda::create([
@@ -133,7 +134,7 @@ class VendaController extends Controller
             'dataVencimento' => $dataVencimento
         ];
 
-        $pdf = PDF::loadView('comprovante', $parcelasData);
+        $pdf = PDF::loadView('Venda.comprovante', $parcelasData);
 
         return tap($pdf->download("Parcelas$venda->id.pdf"), function () {
             redirect('/');
@@ -153,7 +154,7 @@ class VendaController extends Controller
 
             $pdf = PDF::loadView('resumoVenda', $resumo);
 
-            return tap($pdf->download("ResumoVenda$vendas->id.pdf"), function () {
+            return tap($pdf->download("Veanda.ResumoVenda$vendas->id.pdf"), function () {
                 redirect('/');
             });
 
