@@ -22,6 +22,7 @@ Route::post('/pagamento', 'App\Http\Controllers\VendaController@pagamento');
 Route::get('/remove/{id}','App\Http\Controllers\VendaController@remove');
 Route::get('/detalhes/{id}','App\Http\Controllers\VendaController@detalhes');
 Route::get('/resumoVenda/{id}','App\Http\Controllers\VendaController@resumoVenda');
+Route::get('/consulta','App\Http\Controllers\VendaController@consulta');
 
 
 

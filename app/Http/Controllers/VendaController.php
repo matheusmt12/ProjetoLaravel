@@ -7,6 +7,7 @@ use App\Models\Venda;
 use App\Models\Parcela;
 use App\Models\Pessoa;
 use PDF;
+use DateTime;
 use App\Models\Produto;
 class VendaController extends Controller
 {
@@ -17,6 +18,17 @@ class VendaController extends Controller
         $vendas = Venda::all();
         return view('Venda.index',compact('vendas'));
     }
+
+    public function consulta(Request $request){
+        $query = $request->input('search');
+    
+        $vendas = Venda::when($query, function ($queryBuilder, $query) {
+            return $queryBuilder->where('name', 'like', '%' . $query . '%');
+        })->get();
+    
+        return view('Venda.index', compact('vendas'));
+    }
+
 
     public function salva(Request $request){
         $pessoas = Pessoa::all();
@@ -62,11 +74,13 @@ class VendaController extends Controller
 
 
         if( $tipoVenda == 'vista'){
-
-            Venda::create([
-
+            $data = new DateTime();
+            $venda = Venda::create([
+    
                 'name' => $request->input('name'),
                 'valor' => $request->input('valor'),
+                'data' => $data->format('Y-m-d H:i:s')
+            
             ]);
             return redirect('/')->with('mensagem', 'Venda feita com sucesso');
         }else{
@@ -90,10 +104,12 @@ class VendaController extends Controller
 
         }
 
+        $data = new DateTime();
         $venda = Venda::create([
 
             'name' => $request->input('name'),
             'valor' => $request->input('valorCompra'),
+            'data' => $data->format('Y-m-d H:i:s')
         
         ]);
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Venda extends Model
 {
-    protected $fillable = ['name','valor'];
+    protected $fillable = ['name','valor','data'];
     protected $perPage = 2;
 
     public function parcelas(){

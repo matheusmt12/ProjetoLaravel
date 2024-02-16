@@ -86,38 +86,46 @@
     @include('site.layout.nav')
 
     <main>
-        @if($vendas->isEmpty())
-            <p class="empty-message">Não há vendas disponíveis.</p>
-            <a href="/venda" class="create-link">Criar Nova Venda</a>
-        @else
-        <a href="/venda" class="create-link">Criar Nova Venda</a>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Valor</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($vendas as $venda)
-                        <tr>
-                            <td>{{ $venda->id }}</td>
-                            <td>{{ $venda->name ? $venda->name : 'Não informado'}}</td>
-                            <td>R$ {{ number_format($venda->valor, 2, ',', '.') }}</td>
-                            <td>
-                                <a href="/remove/{{ $venda->id }}" onclick="return confirm('Tem certeza que deseja remover?')">Remover</a>|
-                                <a href="/detalhes/{{ $venda->id }}">Detalhes</a>|
-                                <a href="/resumoVenda/{{ $venda->id }}">Resumo da venda</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        @endif
+    <a href="/venda" class="create-link">Criar Nova Venda</a>
 
+<!-- Adicione o campo de pesquisa -->
+<form action="/consulta" method="GET">
+    @csrf
+    <label for="search">Pesquisar:</label>
+    <input type="text" id="search" name="search" placeholder="Digite o nome do cliente">
+    <button type="submit">Buscar</button>
+</form>
 
+@if($vendas->isEmpty())
+    <p class="empty-message">Não há vendas disponíveis.</p>
+@else
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Valor</th>
+                <th>Data</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($vendas as $venda)
+                <tr>
+                    <td>{{ $venda->id }}</td>
+                    <td>{{ $venda->name ? $venda->name : 'Não informado'}}</td>
+                    <td>R$ {{ number_format($venda->valor, 2, ',', '.') }}</td>
+                    <td>{{ $venda->data }}</td>
+                    <td>
+                        <a href="/remove/{{ $venda->id }}" onclick="return confirm('Tem certeza que deseja remover?')">Remover</a>|
+                        <a href="/detalhes/{{ $venda->id }}">Detalhes</a>|
+                        <a href="/resumoVenda/{{ $venda->id }}">Resumo da venda</a>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@endif
     </main>
 </body>
 </html>

@@ -104,6 +104,8 @@
         <table id="parcelasTable"></table>
 
         <input type="submit" value="Processar Pagamento">
+        <button type="button" onclick="window.location.href='/'" style="background-color: #aaa; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">Voltar</button>
+
     </form>
 
     <script>
