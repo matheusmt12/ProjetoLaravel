@@ -152,9 +152,9 @@ class VendaController extends Controller
                 'valor' =>$vendas->valor
             ];
 
-            $pdf = PDF::loadView('resumoVenda', $resumo);
+            $pdf = PDF::loadView('Venda.resumoVenda', $resumo);
 
-            return tap($pdf->download("Veanda.ResumoVenda$vendas->id.pdf"), function () {
+            return tap($pdf->download("ResumoVenda$vendas->id.pdf"), function () {
                 redirect('/');
             });
 
