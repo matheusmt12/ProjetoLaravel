@@ -82,14 +82,19 @@
     </style>
 </head>
 <body>
+        @if (isset($erro))
+            <script>
+                alert("{{ $erro }}");
+            </script>
+        @endif
 
-    <form action="/pagamento" method="post" id="formPagamento">
+    <form action="/pagamento" method="POST" id="formPagamento">
         @csrf
         <h2>Formulário de Pagamento</h2>
 
         <label for="valorCompra">Valor da Compra:</label>
-        <input type="number" id="valorCompra" name="valorCompra" step="0.01" value="{{ $valor }}" readonly>
-        <input type="hidden" value={{$idVenda}} name="idVenda">
+        <input type="number" id="valorCompra" name="valorCompra" step="0.01" value="{{ old('valor)' , $valor) }}" readonly>
+        <input type="hidden" name="name" value="{{old('name' , $name)}}">
 
         <label for="parcelas">Número de Parcelas:</label>
         <input type="text" id="parcelas" name="parcelas" placeholder="Informe o número de parcelas" required>

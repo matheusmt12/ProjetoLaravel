@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Venda extends Model
 {
     protected $fillable = ['name','valor'];
-
+    protected $perPage = 2;
 
     public function parcelas(){
         return $this->hasMany(Parcela::class);

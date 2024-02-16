@@ -88,7 +88,9 @@
     <main>
         @if($vendas->isEmpty())
             <p class="empty-message">Não há vendas disponíveis.</p>
+            <a href="/venda" class="create-link">Criar Nova Venda</a>
         @else
+        <a href="/venda" class="create-link">Criar Nova Venda</a>
             <table border="1">
                 <thead>
                     <tr>
@@ -102,11 +104,12 @@
                     @foreach($vendas as $venda)
                         <tr>
                             <td>{{ $venda->id }}</td>
-                            <td>{{ $venda->name }}</td>
+                            <td>{{ $venda->name ? $venda->name : 'Não informado'}}</td>
                             <td>R$ {{ number_format($venda->valor, 2, ',', '.') }}</td>
                             <td>
                                 <a href="/remove/{{ $venda->id }}" onclick="return confirm('Tem certeza que deseja remover?')">Remover</a>|
-                                <a href="/detalhes/{{ $venda->id }}">Detalhes</a>
+                                <a href="/detalhes/{{ $venda->id }}">Detalhes</a>|
+                                <a href="/resumoVenda/{{ $venda->id }}">Resumo da venda</a>
                             </td>
                         </tr>
                     @endforeach
@@ -114,7 +117,7 @@
             </table>
         @endif
 
-        <a href="/venda" class="create-link">Criar Nova Venda</a>
+
     </main>
 </body>
 </html>

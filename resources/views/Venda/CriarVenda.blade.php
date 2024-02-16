@@ -69,16 +69,14 @@
 </head>
 <body>
 
+
     <form action="/criarVenda" method="post">
         @csrf
         <h2>Formulário de Venda</h2>
 
-        @if(session('mensagem'))
-            <p>{{ session('mensagem') }}</p>
-        @endif
-
         <label for="NomeCliente">Nome do Cliente:</label>
-        <select id="NomeCliente" name="name" required>
+        <select id="NomeCliente" name="name" >
+            <option value="">Sem Nome</option>
             @foreach($pessoas as $pessoa)
                 <option value="{{ $pessoa->name }}">{{ $pessoa->name }}</option>
             @endforeach
@@ -89,7 +87,7 @@
             @foreach($produtos as $produto)
                 <li>
                     <input type="text" name="produtos[]" value="{{ $produto->name }}" readonly>
-                    <input type="number" name="quantidades[]" placeholder="Quantidade" required>
+                    <input type="number" name="quantidades[]" placeholder="Quantidade" >
                     <input type="number" name="precos[]" value="{{ $produto->valor }}" readonly>
                     <input type="text" name="valores[]" value="0" readonly>
                 </li>
@@ -109,31 +107,42 @@
     </form>
 
     <script>
-        // Função para calcular o valor total
-        function calcularValor() {
-            var valores = document.querySelectorAll('input[name="valores[]"]');
-            var total = 0;
+    // Função para calcular o valor total
+    function calcularValor() {
+        var valores = document.querySelectorAll('input[name="valores[]"]');
+        var total = 0;
 
-            valores.forEach(function(valorInput) {
-                total += parseFloat(valorInput.value);
-            });
-
-            document.getElementById('valorTotal').value = total.toFixed(2);
-        }
-
-        // Adiciona um evento de input para calcular o valor total sempre que a quantidade for alterada
-        document.addEventListener('input', function(event) {
-            if (event.target.name === 'quantidades[]') {
-                var produto = event.target.parentNode;
-                var quantidade = parseFloat(event.target.value);
-                var preco = parseFloat(produto.querySelector('input[name="precos[]"]').value);
-                var valor = quantidade * preco;
-
-                produto.querySelector('input[name="valores[]"]').value = valor.toFixed(2);
-
-                calcularValor(); // Recalcula o valor total
-            }
+        valores.forEach(function(valorInput) {
+            total += parseFloat(valorInput.value);
         });
-    </script>
+
+        document.getElementById('valorTotal').value = total.toFixed(2);
+    }
+
+    // Adiciona um evento de input para calcular o valor total sempre que a quantidade for alterada
+    document.addEventListener('input', function(event) {
+        if (event.target.name === 'quantidades[]') {
+            var produto = event.target.parentNode;
+            var quantidade = parseFloat(event.target.value);
+            var preco = parseFloat(produto.querySelector('input[name="precos[]"]').value);
+            var valor = quantidade * preco;
+
+            produto.querySelector('input[name="valores[]"]').value = valor.toFixed(2);
+
+            calcularValor(); // Recalcula o valor total
+        }
+    });
+
+    // Adiciona validação para garantir que o valor total não seja 0 antes de enviar o formulário
+    document.addEventListener('submit', function(event) {
+        var valorTotal = parseFloat(document.getElementById('valorTotal').value);
+
+        if (valorTotal === 0) {
+            alert('Adicione pelo menos um produto antes de enviar o formulário.');
+            event.preventDefault(); // Impede o envio do formulário se o valor total for 0
+        }
+    });
+</script>
+
 </body>
 </html>
