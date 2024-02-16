@@ -107,7 +107,7 @@
     </form>
 
     <script>
-    // Função para calcular o valor total
+
     function calcularValor() {
         var valores = document.querySelectorAll('input[name="valores[]"]');
         var total = 0;
@@ -119,7 +119,7 @@
         document.getElementById('valorTotal').value = total.toFixed(2);
     }
 
-    // Adiciona um evento de input para calcular o valor total sempre que a quantidade for alterada
+
     document.addEventListener('input', function(event) {
         if (event.target.name === 'quantidades[]') {
             var produto = event.target.parentNode;
@@ -129,17 +129,17 @@
 
             produto.querySelector('input[name="valores[]"]').value = valor.toFixed(2);
 
-            calcularValor(); // Recalcula o valor total
+            calcularValor(); 
         }
     });
 
-    // Adiciona validação para garantir que o valor total não seja 0 antes de enviar o formulário
+
     document.addEventListener('submit', function(event) {
         var valorTotal = parseFloat(document.getElementById('valorTotal').value);
 
         if (valorTotal === 0) {
             alert('Adicione pelo menos um produto antes de enviar o formulário.');
-            event.preventDefault(); // Impede o envio do formulário se o valor total for 0
+            event.preventDefault(); 
         }
     });
 </script>

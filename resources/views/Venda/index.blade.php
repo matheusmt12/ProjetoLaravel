@@ -88,7 +88,7 @@
     <main>
     <a href="/venda" class="create-link">Criar Nova Venda</a>
 
-<!-- Adicione o campo de pesquisa -->
+
 <form action="/consulta" method="GET">
     @csrf
     <label for="search">Pesquisar:</label>

@@ -114,7 +114,7 @@
             var numParcelasInput = document.getElementById('parcelas');
             var numParcelas = parseInt(numParcelasInput.value);
 
-            // Adicione a validação diretamente no HTML
+
             if (isNaN(valorCompra) || isNaN(numParcelas) || numParcelas <= 0) {
                 alert('Por favor, insira um valor válido e um número de parcelas maior que zero.');
                 return;
@@ -122,11 +122,11 @@
 
             var valorParcela = valorCompra / numParcelas;
             var table = document.getElementById('parcelasTable');
-            table.innerHTML = '';  // Removido para evitar a remoção de elementos recém-criados
+            table.innerHTML = '';  
 
-            var currentDate = new Date(); // Data atual
+            var currentDate = new Date(); 
 
-            // Adiciona cabeçalho da tabela se não existir
+
             if (table.getElementsByTagName('thead').length === 0) {
                 var headerRow = table.createTHead().insertRow(0);
                 headerRow.style.backgroundColor = '#4caf50';
@@ -140,7 +140,7 @@
             }
 
             for (var i = 1; i <= numParcelas; i++) {
-                // Adiciona um mês a cada parcela
+
                 currentDate.setMonth(currentDate.getMonth() + 1);
 
                 var row = table.insertRow(i);
