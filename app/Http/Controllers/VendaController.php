@@ -150,18 +150,19 @@ class VendaController extends Controller
         }
 
 
-        $parcelasData = [
-            'idVenda' => $venda->id,
-            'parcelas' => $parcelas,
-            'dataVencimento' => $dataVencimento
-        ];
+        // $parcelasData = [
+        //     'idVenda' => $venda->id,
+        //     'parcelas' => $parcelas,
+        //     'dataVencimento' => $dataVencimento
+        // ];
 
-        $pdf = PDF::loadView('Venda.comprovante', $parcelasData);
+        // $pdf = PDF::loadView('Venda.comprovante', $parcelasData);
 
-        return tap($pdf->download("Parcelas$venda->id.pdf"), function () {
-            redirect('/');
-        });
+        // return tap($pdf->download("Parcelas$venda->id.pdf"), function () {
+        //     redirect('/');
+        // });
         
+        return redirect('/');
     }
 
     public function edit($id){
