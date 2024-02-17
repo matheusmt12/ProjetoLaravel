@@ -95,6 +95,10 @@
         <label for="valorCompra">Valor da Compra:</label>
         <input type="number" id="valorCompra" name="valorCompra" step="0.01" value="{{ old('valor)' , $valor) }}" readonly>
         <input type="hidden" name="name" value="{{old('name' , $name)}}">
+        @if (!empty($idVenda))
+            <input type="hidden" value="{{$idVenda}}" name="idVenda">
+        @endif
+
 
         <label for="parcelas">Número de Parcelas:</label>
         <input type="text" id="parcelas" name="parcelas" placeholder="Informe o número de parcelas" required>

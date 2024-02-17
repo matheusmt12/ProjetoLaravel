@@ -119,6 +119,7 @@
                     <td>
                         <a href="/remove/{{ $venda->id }}" onclick="return confirm('Tem certeza que deseja remover?')">Remover</a>|
                         <a href="/detalhes/{{ $venda->id }}">Detalhes</a>|
+                        <a href="/edit/{{ $venda->id }}">Editar</a>|
                         <a href="/resumoVenda/{{ $venda->id }}">Resumo da venda</a>
                     </td>
                 </tr>

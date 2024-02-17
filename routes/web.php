@@ -23,6 +23,9 @@ Route::get('/remove/{id}','App\Http\Controllers\VendaController@remove');
 Route::get('/detalhes/{id}','App\Http\Controllers\VendaController@detalhes');
 Route::get('/resumoVenda/{id}','App\Http\Controllers\VendaController@resumoVenda');
 Route::get('/consulta','App\Http\Controllers\VendaController@consulta');
+Route::get('/edit/{id}','App\Http\Controllers\VendaController@edit');
+Route::post('/editSalvar','App\Http\Controllers\VendaController@editSalvar');
+Route::get('/editParcelas','App\Http\Controllers\VendaController@editParcelas');
 
 
 
